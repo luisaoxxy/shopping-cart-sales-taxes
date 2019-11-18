@@ -1,15 +1,23 @@
 package com.shoppingcart;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class ItemParserServiceTest {
 
 	private ShoppingCartParserService itemParserService = new ShoppingCartParserService(new SalesTaxCalculatorService());
-	private final DecimalFormat formatter = new DecimalFormat("##0.00");
+	private DecimalFormat formatter;
 
+	@Before
+	public void setUp(){
+		var symbols = new DecimalFormatSymbols();
+		symbols.setDecimalSeparator(',');
+		formatter = new DecimalFormat("##0.00",symbols);
+	}
 
 	@Test
 	public void parseInput1() {
